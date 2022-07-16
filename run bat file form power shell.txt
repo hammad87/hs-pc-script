@@ -1,0 +1,1 @@
+A = Start-Process -FilePath .\my-app\my-fle.bat -Wait -passthru;$a.ExitCode
