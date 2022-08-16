@@ -1,4 +1,4 @@
-# hs-pc-script
+# HS-WINDOWS-DEBLOAT
 ## Debloat Windows PC with the following PowerShell Command
 
 ```
