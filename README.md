@@ -1,4 +1,5 @@
 # hs-pc-script
-My WIN PC Debloat and Soft Installation Script
+Deblot Windows PC with the PowerShell Command
 
-iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/hammad87/hs-pc-script/main/myscript.ps1'))
+
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/hammad87/hs-pc-script/main/deblot.ps1'))
