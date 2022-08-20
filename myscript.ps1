@@ -384,7 +384,7 @@ $apps = @(
     "Microsoft.XboxGameOverlay"
     "Microsoft.XboxGamingOverlay"
     "Microsoft.XboxSpeechToTextOverlay"
-    "Microsoft.YourPhone"
+    #"Microsoft.YourPhone"
     "Microsoft.ZuneMusic"
     "Microsoft.ZuneVideo"
 
@@ -444,7 +444,7 @@ $apps = @(
     "ShazamEntertainmentLtd.Shazam"
     "SlingTVLLC.SlingTV"
     "SpotifyAB.SpotifyMusic"
-    #"TheNewYorkTimes.NYTCrossword"
+    "TheNewYorkTimes.NYTCrossword"
     "ThumbmunkeysLtd.PhototasticCollage"
     "TuneIn.TuneInRadio"
     "WinZipComputing.WinZipUniversal"
@@ -465,7 +465,7 @@ $apps = @(
     #"Windows.ContactSupport"
 
     # apps which other apps depend on
-    "Microsoft.Advertising.Xaml"
+    #"Microsoft.Advertising.Xaml"
 )
 
 $appxprovisionedpackage = Get-AppxProvisionedPackage -Online
@@ -516,59 +516,59 @@ Write-Host "Removing OneDrive integration"
 #   Description:
 # This script will remove and disable OneDrive integration.
 
-Import-Module -DisableNameChecking $PSScriptRoot\..\lib\New-FolderForced.psm1
-Import-Module -DisableNameChecking $PSScriptRoot\..\lib\take-own.psm1
+#Import-Module -DisableNameChecking $PSScriptRoot\..\lib\New-FolderForced.psm1
+#Import-Module -DisableNameChecking $PSScriptRoot\..\lib\take-own.psm1
 
-Write-Output "Kill OneDrive process"
-taskkill.exe /F /IM "OneDrive.exe"
-taskkill.exe /F /IM "explorer.exe"
+#Write-Output "Kill OneDrive process"
+#taskkill.exe /F /IM "OneDrive.exe"
+#taskkill.exe /F /IM "explorer.exe"
 
-Write-Output "Remove OneDrive"
-if (Test-Path "$env:systemroot\System32\OneDriveSetup.exe") {
-    & "$env:systemroot\System32\OneDriveSetup.exe" /uninstall
-}
-if (Test-Path "$env:systemroot\SysWOW64\OneDriveSetup.exe") {
-    & "$env:systemroot\SysWOW64\OneDriveSetup.exe" /uninstall
-}
+#Write-Output "Remove OneDrive"
+#if (Test-Path "$env:systemroot\System32\OneDriveSetup.exe") {
+#    & "$env:systemroot\System32\OneDriveSetup.exe" /uninstall
+#}
+#if (Test-Path "$env:systemroot\SysWOW64\OneDriveSetup.exe") {
+#    & "$env:systemroot\SysWOW64\OneDriveSetup.exe" /uninstall
+#}
 
-Write-Output "Removing OneDrive leftovers"
-Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$env:localappdata\Microsoft\OneDrive"
-Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$env:programdata\Microsoft OneDrive"
-Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$env:systemdrive\OneDriveTemp"
+#Write-Output "Removing OneDrive leftovers"
+#Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$env:localappdata\Microsoft\OneDrive"
+#Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$env:programdata\Microsoft OneDrive"
+#Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$env:systemdrive\OneDriveTemp"
 # check if directory is empty before removing:
-If ((Get-ChildItem "$env:userprofile\OneDrive" -Recurse | Measure-Object).Count -eq 0) {
-    Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$env:userprofile\OneDrive"
-}
+#If ((Get-ChildItem "$env:userprofile\OneDrive" -Recurse | Measure-Object).Count -eq 0) {
+#    Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$env:userprofile\OneDrive"
+#}
 
-Write-Output "Disable OneDrive via Group Policies"
-New-FolderForced -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\OneDrive"
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\OneDrive" "DisableFileSyncNGSC" 1
+#Write-Output "Disable OneDrive via Group Policies"
+#New-FolderForced -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\OneDrive"
+#Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\OneDrive" "DisableFileSyncNGSC" 1
 
-Write-Output "Remove Onedrive from explorer sidebar"
-New-PSDrive -PSProvider "Registry" -Root "HKEY_CLASSES_ROOT" -Name "HKCR"
-mkdir -Force "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}"
-Set-ItemProperty -Path "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" "System.IsPinnedToNameSpaceTree" 0
-mkdir -Force "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}"
-Set-ItemProperty -Path "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" "System.IsPinnedToNameSpaceTree" 0
-Remove-PSDrive "HKCR"
+#Write-Output "Remove Onedrive from explorer sidebar"
+#New-PSDrive -PSProvider "Registry" -Root "HKEY_CLASSES_ROOT" -Name "HKCR"
+#mkdir -Force "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}"
+#Set-ItemProperty -Path "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" "System.IsPinnedToNameSpaceTree" 0
+#mkdir -Force "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}"
+#Set-ItemProperty -Path "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" "System.IsPinnedToNameSpaceTree" 0
+#Remove-PSDrive "HKCR"
 
 # Thank you Matthew Israelsson
-Write-Output "Removing run hook for new users"
-reg load "hku\Default" "C:\Users\Default\NTUSER.DAT"
-reg delete "HKEY_USERS\Default\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" /f
-reg unload "hku\Default"
+#Write-Output "Removing run hook for new users"
+#reg load "hku\Default" "C:\Users\Default\NTUSER.DAT"
+#reg delete "HKEY_USERS\Default\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" /f
+#reg unload "hku\Default"
 
-Write-Output "Removing startmenu entry"
-Remove-Item -Force -ErrorAction SilentlyContinue "$env:userprofile\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"
+#Write-Output "Removing startmenu entry"
+#Remove-Item -Force -ErrorAction SilentlyContinue "$env:userprofile\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"
 
-Write-Output "Removing scheduled task"
-Get-ScheduledTask -TaskPath '\' -TaskName 'OneDrive*' -ea SilentlyContinue | Unregister-ScheduledTask -Confirm:$false
+#Write-Output "Removing scheduled task"
+#Get-ScheduledTask -TaskPath '\' -TaskName 'OneDrive*' -ea SilentlyContinue | Unregister-ScheduledTask -Confirm:$false
 
-Write-Output "Restarting explorer"
-Start-Process "explorer.exe"
+#Write-Output "Restarting explorer"
+#Start-Process "explorer.exe"
 
-Write-Output "Waiting for explorer to complete loading"
-Start-Sleep 10
+#Write-Output "Waiting for explorer to complete loading"
+#Start-Sleep 10
 
 # This can break Windows Update and some system utilities, see #297.
 #Write-Output "Removing additional OneDrive leftovers"
@@ -581,8 +581,8 @@ Start-Sleep 10
 ## Install Apps
 
 
-Write-Host "Upgrading"
-winget upgrade --all
+#Write-Host "Upgrading"
+#winget upgrade --all
 
 Write-Host "Installing Firefox"
 winget install -e Mozilla.Firefox
@@ -608,17 +608,17 @@ winget install -e Famatech.AdvancedIPScanner
 Write-Host "Installing WhatsApp"
 winget install -e WhatsApp.WhatsApp
 
-Write-Host "Installing Samsung Gallery"
-winget install -e 9NBLGGH4N9R9 --accept-package-agreements 
+#Write-Host "Installing Samsung Gallery"
+#winget install -e 9NBLGGH4N9R9 --accept-package-agreements 
 
-Write-Host "Installing Samsung Flow"
-winget install -e 9NBLGGH5GB0M --accept-package-agreements
+#Write-Host "Installing Samsung Flow"
+#winget install -e 9NBLGGH5GB0M --accept-package-agreements
 
 Write-Host "Installing Samsung Notes"
 winget install -e 9NBLGGH43VHV --accept-package-agreements
 
-Write-Host "Installing Adobe Acrobat Reader 64-bit"
-winget install -e Adobe.Acrobat.Reader.64-bit
+#Write-Host "Installing Adobe Acrobat Reader 64-bit"
+#winget install -e Adobe.Acrobat.Reader.64-bit
 
 Write-Host "Installing Todoist"
 winget install -e Doist.Todoist --accept-package-agreements
@@ -626,8 +626,8 @@ winget install -e Doist.Todoist --accept-package-agreements
 Write-Host "Installing AnyDesk"
 winget install -e AnyDeskSoftwareGmbH.AnyDesk -s winget --accept-package-agreements
 
-Write-Host "Installing Chocolatey Windows Package Manager"
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+#Write-Host "Installing Chocolatey Windows Package Manager"
+#Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
 
 
@@ -651,8 +651,8 @@ Write-Host ".NET 3.5 has been successfully installed!"
 Write-Host "Initializing the installation of Internet Explorer 11"
 dism /online /Add-Capability /CapabilityName:Browser.InternetExplorer~~~~0.0.11.0
 
-Write-Host "Installing Microsoft 365"
-winget install -e Microsoft.Office --accept-package-agreements
+#Write-Host "Installing Microsoft 365"
+#winget install -e Microsoft.Office --accept-package-agreements
 
 Write-Host "Initializing the installation of Hyper-V..."
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
