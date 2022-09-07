@@ -456,13 +456,13 @@ $apps = @(
     "king.com.CandyCrushSodaSaga"
 
     # apps which cannot be removed using Remove-AppxPackage
-    #"Microsoft.BioEnrollment"
+    "Microsoft.BioEnrollment"
     #"Microsoft.MicrosoftEdge"
-    #"Microsoft.Windows.Cortana"
-    #"Microsoft.WindowsFeedback"
+    "Microsoft.Windows.Cortana"
+    "Microsoft.WindowsFeedback"
     #"Microsoft.XboxGameCallableUI"
     #"Microsoft.XboxIdentityProvider"
-    #"Windows.ContactSupport"
+    "Windows.ContactSupport"
 
     # apps which other apps depend on
     #"Microsoft.Advertising.Xaml"
@@ -605,8 +605,8 @@ winget install -e RARLab.WinRAR
 Write-Host "Installing Advanced IP Scanner"
 winget install -e Famatech.AdvancedIPScanner
 
-Write-Host "Installing WhatsApp"
-winget install -e WhatsApp.WhatsApp
+#Write-Host "Installing WhatsApp"
+#winget install -e WhatsApp.WhatsApp
 
 #Write-Host "Installing Samsung Gallery"
 #winget install -e 9NBLGGH4N9R9 --accept-package-agreements 
@@ -628,8 +628,6 @@ winget install -e AnyDeskSoftwareGmbH.AnyDesk -s winget --accept-package-agreeme
 
 #Write-Host "Installing Chocolatey Windows Package Manager"
 #Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
-
 
 Write -Host "Setting Theme to Dark"
 Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
@@ -660,5 +658,4 @@ Write-Host "Hyper-V has been successfully installed!"
 
 
 Write -Host "ALL DONE :) Restarting PC"
-
-restart-computer
+#restart-computer
