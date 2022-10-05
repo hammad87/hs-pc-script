@@ -658,6 +658,6 @@ dism /online /Add-Capability /CapabilityName:Browser.InternetExplorer~~~~0.0.11.
 
 Write -Host "JOINING DOMAIN"
 
-add-computer –domainname "HIMEDIC.COM" -restart
+Add-Computer –Domainname "HIMEDIC" -restart
 
 #restart-computer
