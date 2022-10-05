@@ -660,4 +660,4 @@ Write -Host "JOINING DOMAIN"
 
 Add-Computer –Domainname "HIMEDIC"
 
-#restart-computer
+restart-computer
