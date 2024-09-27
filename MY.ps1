@@ -2,9 +2,9 @@ Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
 $ErrorActionPreference = 'SilentlyContinue'
-$wshell = New-Object -ComObject Wscript.Shell
-$Button = [System.Windows.MessageBoxButton]::YesNoCancel
-$ErrorIco = [System.Windows.MessageBoxImage]::Error
+#$wshell = New-Object -ComObject Wscript.Shell
+#$Button = [System.Windows.MessageBoxButton]::YesNoCancel
+#$ErrorIco = [System.Windows.MessageBoxImage]::Error
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
 	Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
 	Exit
@@ -584,26 +584,26 @@ Write-Host "Removing OneDrive integration"
 #Write-Host "Upgrading"
 #winget upgrade --all
 
-Write-Host "Installing Firefox"
-winget install -e Mozilla.Firefox
+#Write-Host "Installing Firefox"
+#winget install -e Mozilla.Firefox
 
-Write-Host "Installing Google Chrome"
-winget install -e Google.Chrome
+#Write-Host "Installing Google Chrome"
+#winget install -e Google.Chrome
 
-Write-Host "Installing Notepad++"
-winget install -e Notepad++.Notepad++
+#Write-Host "Installing Notepad++"
+#winget install -e Notepad++.Notepad++
 
-Write-Host "Installing VLC Media Player"
-winget install -e VideoLAN.VLC
+#Write-Host "Installing VLC Media Player"
+#winget install -e VideoLAN.VLC
 
-Write-Host "Installing Media Player Classic"
-winget install -e clsid2.mpc-hc
+#Write-Host "Installing Media Player Classic"
+#winget install -e clsid2.mpc-hc
 
-Write-Host "Installing WinRAR Compression Tool"
-winget install -e RARLab.WinRAR
+#Write-Host "Installing WinRAR Compression Tool"
+#winget install -e RARLab.WinRAR
 
-Write-Host "Installing Advanced IP Scanner"
-winget install -e Famatech.AdvancedIPScanner
+#Write-Host "Installing Advanced IP Scanner"
+#winget install -e Famatech.AdvancedIPScanner
 
 #Write-Host "Installing WhatsApp"
 #winget install -e WhatsApp.WhatsApp
@@ -614,14 +614,14 @@ winget install -e Famatech.AdvancedIPScanner
 #Write-Host "Installing Samsung Flow"
 #winget install -e 9NBLGGH5GB0M --accept-package-agreements
 
-Write-Host "Installing Samsung Notes"
-winget install -e 9NBLGGH43VHV --accept-package-agreements
+#Write-Host "Installing Samsung Notes"
+#winget install -e 9NBLGGH43VHV --accept-package-agreements
 
 #Write-Host "Installing Adobe Acrobat Reader 64-bit"
 #winget install -e Adobe.Acrobat.Reader.64-bit
 
-Write-Host "Installing Todoist"
-winget install -e Doist.Todoist --accept-package-agreements
+#Write-Host "Installing Todoist"
+#winget install -e Doist.Todoist --accept-package-agreements
 
 Write-Host "Installing AnyDesk"
 winget install -e AnyDeskSoftwareGmbH.AnyDesk -s winget --accept-package-agreements
@@ -629,7 +629,7 @@ winget install -e AnyDeskSoftwareGmbH.AnyDesk -s winget --accept-package-agreeme
 #Write-Host "Installing Chocolatey Windows Package Manager"
 #Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
-Write -Host "Setting Theme to Dark"
+Write-Output -Host "Setting Theme to Dark"
 Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
 
 Write-Host "Enabling Hibernation..."
@@ -657,5 +657,5 @@ dism /online /Add-Capability /CapabilityName:Browser.InternetExplorer~~~~0.0.11.
 #Write-Host "Hyper-V has been successfully installed!"
 
 
-Write -Host "ALL DONE :) Restarting PC"
+Write-Output -Host "ALL DONE :) Restarting PC"
 #restart-computer

@@ -2,9 +2,9 @@ Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
 $ErrorActionPreference = 'SilentlyContinue'
-$wshell = New-Object -ComObject Wscript.Shell
-$Button = [System.Windows.MessageBoxButton]::YesNoCancel
-$ErrorIco = [System.Windows.MessageBoxImage]::Error
+#$wshell = New-Object -ComObject Wscript.Shell
+#$Button = [System.Windows.MessageBoxButton]::YesNoCancel
+#$ErrorIco = [System.Windows.MessageBoxImage]::Error
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
 	Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
 	Exit
@@ -57,12 +57,12 @@ Write-Host "Installing Adobe Acrobat Reader 64-bit"
 winget install -e Adobe.Acrobat.Reader.64-bit
 
 Write-Host "Installing Chocolatey Windows Package Manager"
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
 Write-Host "Installing Office 2019"
 choco install office2019proplus
 
-Write -Host "Setting Theme to Dark"
+Write-Output -Host "Setting Theme to Dark"
 Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
 
 Write-Host "Enabling Hibernation..."
@@ -82,6 +82,5 @@ Write-Host ".NET 3.5 has been successfully installed!"
 Write-Host "Initializing the installation of Internet Explorer 11"
 dism /online /Add-Capability /CapabilityName:Browser.InternetExplorer~~~~0.0.11.0
 
-Write -Host "ALL DONE :) Restarting PC"
-
-restart-computer
+Write-Output -Host "ALL DONE :) Restarting PC"
+#restart-computer

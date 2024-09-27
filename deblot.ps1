@@ -1,10 +1,10 @@
 Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
-$ErrorActionPreference = 'SilentlyContinue'
-$wshell = New-Object -ComObject Wscript.Shell
-$Button = [System.Windows.MessageBoxButton]::YesNoCancel
-$ErrorIco = [System.Windows.MessageBoxImage]::Error
+#$ErrorActionPreference = 'SilentlyContinue'
+#$wshell = New-Object -ComObject Wscript.Shell
+#$Button = [System.Windows.MessageBoxButton]::YesNoCancel
+#$ErrorIco = [System.Windows.MessageBoxImage]::Error
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
 	Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
 	Exit
@@ -444,7 +444,7 @@ $apps = @(
     "ShazamEntertainmentLtd.Shazam"
     "SlingTVLLC.SlingTV"
     "SpotifyAB.SpotifyMusic"
-    #"TheNewYorkTimes.NYTCrossword"
+    "TheNewYorkTimes.NYTCrossword"
     "ThumbmunkeysLtd.PhototasticCollage"
     "TuneIn.TuneInRadio"
     "WinZipComputing.WinZipUniversal"
@@ -465,7 +465,7 @@ $apps = @(
     #"Windows.ContactSupport"
 
     # apps which other apps depend on
-    "Microsoft.Advertising.Xaml"
+    #"Microsoft.Advertising.Xaml"
 )
 
 $appxprovisionedpackage = Get-AppxProvisionedPackage -Online
@@ -577,7 +577,7 @@ Start-Sleep 10
 #    Remove-Item -Recurse -Force $item.FullName
 #}
 
-Write -Host "Setting Theme to Dark"
+Write-Host "Setting Theme to Dark"
 Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
 
 Write-Host "Enabling Hibernation..."
@@ -597,6 +597,6 @@ Write-Host ".NET 3.5 has been successfully installed!"
 Write-Host "Initializing the installation of Internet Explorer 11"
 dism /online /Add-Capability /CapabilityName:Browser.InternetExplorer~~~~0.0.11.0
 
-Write -Host "ALL DONE :) Restarting PC"
+Write-Host "ALL DONE :) Restarting PC"
 
-restart-computer
+#restart-computer
